@@ -1,2 +1,1157 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/micorockslol123/dasdadasdasd/main/main"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/micorockslol123/egewfwegfweg/main/main"))()
+if not game:IsLoaded() then             --------------- adding gui later
+    game.Loaded:Wait()
+end
+ 
+local AimPart = Ap
+
+getgenv().Extortion = { ---- Creds to splash Using  table]
+
+    Options = {
+        ['Key'] = "Your Key Here", -- // Your Luarmor Key.
+        ['Notification'] = true, -- // Shows a Little notification/Intro
+        ['guncham'] = true,                      
+        ['Fps_Unlocker']= false, --{.......}
+        ['FindBestServer'] = true, -- finds best server for u 
+        ['FPSBoost'] = true, ---- LowGfx
+        ['BulletTracer'] = true,
+        ['AntiLag'] = true,
+        ['Nodellay'] = true,
+        ['Shaders'] = true,
+        ['Aimview'] = true, ---- it aimviews yourself
+        ['ModDetector'] = true,
+        ['Textures'] = true,
+        ['AntiFling'] = true,
+        ['Trashtalk'] = true, ---- talks hard core shit {Keybind = y}
+    },
+    Camlock = {
+        ['Enabled'] = false,
+        ["UseKeyBoardKey"] = true,
+        ["KeyBoardKey"] = Enum.KeyCode.E,
+        ['FirstPerson'] = true,
+        ['ThirdPerson'] = true,
+    },
+    Horizontal = {
+        ["PredictMovement"] = true,
+        ["PredictionVelocity"] = 0.17221418
+    },
+    Smooth = {
+        ["Smoothness"] = true,
+        ["SmoothnessAmount"] = 0.019,
+        ["SmoothMethod"] = Enum.EasingStyle.Circular,
+        ["SmoothMethodV2"] = Enum.EasingDirection.InOut
+    },
+    Silent = {
+        ['Keybind'] = "p", -- // Toggle Key For Silent Aim[]
+        ['Enabled'] = false, -- // Self Explanitory
+        ['Mode'] = "Target",
+        ['ClosestPart'] = false, -- // Gets Closest Part On The Player
+        ['ClosestPoint'] = true, -- // Gets ClosestPoint off part 
+        ['Predict'] = true,
+        ['Prediction'] = 0.115, -- // Pre= truediction Of Silent
+        ['HitChance'] = 100, -- // Hit Changc To Hit More/Less Shots
+        ['Part'] = "Head", -- // HitPart of where the silent shoots.
+    },
+    idk = {
+        ['AntiCurve'] = true,
+        ['AntiGroundShots'] = true,
+    },
+    D = {
+        Desync = true,
+    },   
+    FOV = {
+        ['Visible'] = true, -- // // FOV visible or not
+        ['Radius'] = 12, -- // FOV radius
+        ['Color'] = Color3.fromRGB(0, 162, 255), -- // Color of FOV
+        ['Filled'] = false,
+        ['Transparency'] = 0.25,
+        ['Thickness'] = 1, -- // Thickness of FOV
+        ['NumSides'] = 32
+    },
+    Shake = {
+        ['Shake_Enabled'] = false,
+        ['X'] = 20,
+        ['Y'] = 30,
+        ['Z'] = 20
+    },
+    Easing_Styles = {
+        ['Easing1'] = Enum.EasingStyle.Elastic, -- // Style
+        ['Easing2'] = Enum.EasingStyle.Sine -- // Direction
+    },
+    Spin = {
+        ["Toggle"] = false,
+        ["RotationSpeed"] = 2600, -- higher you go the faster the spin. 2500 is good
+        ["Keybind"] = Enum.KeyCode.V
+    },
+	AutoPrediction = {
+        ['Enabled'] = false,
+        ['RefreshRate'] = 0.1,
+        ['Ping_10'] = 0.10,
+        ['Ping_20'] = 0.11,
+        ['Ping_30'] = 0.12,
+        ['Ping_40'] = 0.123,
+        ['Ping_50'] = 0.125,
+        ['Ping_60'] = 0.127,
+        ['Ping_70'] = 0.133,
+        ['Ping_80'] = 0.134,
+        ['Ping_90'] = 0.1365,
+        ['Ping_100'] = 0.1374,
+        ['Ping_110'] = 0.12,
+        ['Ping_120'] = 0.12,
+        ['Ping_130'] = 0.12,
+        ['Ping_140'] = 0.13,
+        ['Ping_150'] = 0.1405,
+    },    
+    Misc = {
+        ['AntiAimViewer'] = true, 
+        ['Resolver'] = true, -- // Delta??????????????????????????????????????????
+        ['Esp'] = true, ------------ adding toogle later
+    },    
+    Checks = { -- // Da Hood Checks, ETC.
+        [''] = true, -- // Checks if you are dead.
+        ['Knocked'] = true, -- // Checks If The Target Is Knocked
+        ['Wall'] = true, -- // Checks If Target Is Not In Sight
+        ['Crew'] = false, -- // Won't Lock Onto Them If They Are In Your Crew
+        ['Friend'] = true, -- // Checks If They Are On Your Friends list
+
+    },
+    Macro = {
+        ['Enabled'] = true, -- DeathIf you want to use macro
+        ['Keybind'] = "q", -- // Keybind to toggle the macro
+        ['Mode'] = "FirstPerson", -- // First person or third person
+    },
+    Etc = {
+    ['Autoclicker'] = true,
+    
+    }
+}
+--- hello guys so i am making the best closet chesting streamable script and i am gonna skid for fun so yeah 
+repeat
+    wait()
+until game:IsLoaded() and game.Players.LocalPlayer.Character:FindFirstChild("FULLY_LOADED_CHAR")
+
+local Players, Client, Mouse, RS, Camera =
+game:GetService("Players"),
+game:GetService("Players").LocalPlayer,
+game:GetService("Players").LocalPlayer:GetMouse(),
+game:GetService("RunService"),
+game.Workspace.CurrentCamera
+
+local YO, MousePressed, CanNotify = nil, false, false
+
+local Extortion = getgenv().Extortion
+
+local Circle = Drawing.new("Circle")
+Circle.Color = getgenv().Extortion.FOV.Color
+Circle.Thickness = getgenv().Extortion.FOV.Thickness                                          
+Circle.Filled = getgenv().Extortion.FOV.Filled
+Circle.Transparency = getgenv().Extortion.FOV.Transparency
+Circle.NumSides = getgenv().Extortion.FOV.NumSides
+local UpdateFOV = function()
+    if (not Circle) then
+        return Circle
+    end
+    Circle.Visible = getgenv().Extortion.FOV.Visible
+    Circle.Radius = getgenv().Extortion.FOV.Radius * 3
+    Circle.Position = Vector2.new(Mouse.X, Mouse.Y + (game:GetService("GuiService"):GetGuiInset().Y))
+    return Circle
+end
+
+RunService.Heartbeat:Connect(UpdateFOV)
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+local Toggle = getgenv().Extortion.Spin.Toggle
+local RotationSpeed = getgenv().Extortion.Spin.RotationSpeed
+local Keybind = getgenv().Extortion.Spin.Keybind
+
+local function OnKeyPress(Input, GameProcessedEvent)
+    if Input.KeyCode == Keybind and not GameProcessedEvent then 
+        Toggle = not Toggle
+    end
+end
+
+UserInputService.InputBegan:Connect(OnKeyPress)
+
+local LastRenderTime = 0
+local FullCircleRotation = 2 * math.pi
+local TotalRotation = 0
+
+local function RotateCamera()
+    if Toggle then
+        local CurrentTime = tick()
+        local TimeDelta = math.min(CurrentTime - LastRenderTime, 0.01)
+        LastRenderTime = CurrentTime
+
+        local Rotation = CFrame.fromAxisAngle(Vector3.new(0, 1, 0), math.rad(RotationSpeed * TimeDelta))
+        Camera.CFrame = Camera.CFrame * Rotation
+
+        TotalRotation = TotalRotation + math.rad(RotationSpeed * TimeDelta)
+        if TotalRotation >= FullCircleRotation then
+            Toggle = false
+            TotalRotation = 0
+        end
+    end
+end
+
+RunService.RenderStepped:Connect(RotateCamera)
+
+local mainevent = MainEventLocate()
+
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+
+local function SendNotification(text)
+    Notification:Notify(
+        {Title = "Extortion.Lua ", Description = "Fed  "..text},
+        {OutlineColor = Color3.fromRGB(50,76,110),Time = 2, Type = "image"},
+        {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(50,76,110)}
+    )
+end 
+
+if Extortion.Notification then
+    SendNotification("Extortion.LUA")
+    wait(3.5)
+    SendNotification("FEDDDDDDDDDDDD - finished injecting The Best streamable")
+end
+
+
+ClosestPlrFromMouse = function()
+    local Target, Closest = nil, 1 / 0
+
+    for _, v in pairs(Players:GetPlayers()) do
+        if (v.Character and v ~= Client and v.Character:FindFirstChild("HumanoidRootPart")) then
+            local Position, OnScreen = Camera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
+            local Distance = (Vector2.new(Position.X, Position.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+
+            if (Circle.Radius > Distance and Distance < Closest and OnScreen) then
+                Closest = Distance
+                Target = v
+            end
+        end
+    end
+    return Target
+end
+local V2 = Vector2
+local f = find
+
+local WTS = function(Object)
+    local ObjectVector = Camera:WorldToScreenPoint(Object.Position)
+    return V2.new(ObjectVector.X, ObjectVector.Y)
+end
+
+local IsOnScreen = function(Object)
+    local IsOnScreen = Camera:WorldToScreenPoint(Object.Position)
+    return IsOnScreen
+end
+
+local FilterObjs = function(Object)
+    if string.find(Object.Name, "Gun") then
+        return
+    end
+    if table.f({"Part", "MeshPart", "BasePart"}, Object.ClassName) then
+        return true
+    end
+end
+
+local LOOOL = game.Workspace.CurrentCamera
+local DICK = game.Players.LocalPlayer:GetMouse()
+
+function GetClosestPLR()
+
+    local closestPlayer
+    local SuckAniggaDick = math.huge
+
+    for i, v in pairs(game.Players:GetPlayers()) do
+        pcall(
+            function()
+                if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") then
+                    local pos = LOOOL:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+                    local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(DICK.X, DICK.Y)).magnitude
+                    if (Vector2.new(pos.X, pos.Y) - Vector2.new(DICK.X, DICK.Y)).magnitude < SuckAniggaDick then
+                        closestPlayer = v
+                        SuckAniggaDick = magnitude
+                    end
+                end
+            end
+        )
+    end
+    return closestPlayer
+end
+
+local Monkey = math.huge
+local SUCKANIGGERDICKKKK = nil
+
+function GetBodyPartClosest(character)
+
+    if (character and character:GetChildren()) then
+        for k, x in next, character:GetChildren() do
+            if Filter(x) and IsOnScreen(x) then
+                local Distance = (WTS(x) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+
+                if Distance < Monkey then
+                    Monkey = Distance
+                    SUCKANIGGERDICKKKK = x
+                end
+            end
+        end
+    end
+
+    return SUCKANIGGERDICKKKK
+end
+
+local AfricanBootyScratcher = Task
+
+AfricanBootyScratcher.spawn(
+    function()
+        while AfricanBootyScratcher.wait() do
+            if Prey and getgenv().Extortion.Silent.Enabled and getgenv().Extortion.Silent.ClosestPart then
+                getgenv().Extortion.Silent.Part = tostring(GetBodyPartClosest(Prey.Character))
+            end
+        end
+    end
+)
+
+
+if getgenv().Extortion.Checks.Death == true and Plr and Plr.Character:FindFirstChild("Humanoid") then
+    if Plr.Character.Humanoid.health < 2 then
+        Plr = nil
+        IsTargetting = false
+    end
+end
+
+
+if getgenv().Extortion.Checks.Death == true and Plr and Plr.Character:FindFirstChild("Humanoid") then
+    if Client.Character.Humanoid.health < 2 then
+        Plr = nil
+        IsTargetting = false
+    end
+end
+
+
+if getgenv().Extortion.Checks.Knocked == true and Prey and Prey.Character then
+    local KOd = Prey.Character:WaitForChild("BodyEffects")["K.O"].Value
+    local Grabbed = Prey.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
+    if KOd or Grabbed then
+        Prey = nil
+    end
+end
+
+
+if getgenv().Extortion.Checks.Knocked == true and Plr and Plr.Character then
+    local KOd = Plr.Character:WaitForChild("BodyEffects")["K.O"].Value
+    local Grabbed = Plr.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
+    if KOd or Grabbed then
+        Plr = nil
+        IsTargetting = false
+    end
+end
+
+
+function MainEventLocate()
+
+    for _,v in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+        if v.Name == "MainEvent" then
+
+            return v
+        end
+    end
+end
+
+local function GetArgs()
+    if game.PlaceId == 2788229376 or game.PlaceId == 4106313503 then
+        return "UpdateMousePos"
+    elseif game.PlaceId == 5602055394 or game.PlaceId == 7951883376 then
+        return "MousePos"
+    elseif game.PlaceId == 10100958808 or game.PlaceId == 12645617354 or game.PlaceId == 14171242539 or game.PlaceId == 14412436145 or game.PlaceId == 14412355918 or game.PlaceId == 14413720089 then
+        return "MOUSE"
+    else
+        return "UpdateMousePos"
+    end
+end
+
+if getgenv().Extortion.idk.AntiGroundShots == true then
+pcall(function()
+local TargetVelv5 = targ.Character
+TargetVelv5.Velocity = Vector3.new(TargetVelv5.Velocity.X, (TargetVelv5.Velocity.Y * 5), TargetVelv5.Velocity.Z)
+TargetVelv5.AssemblyLinearVelocity = Vector3.new(TargetVelv5.Velocity.X, (TargetVelv5.Velocity.Y * 5), TargetVelv5.Velocity.Z)
+ end)
+end
+
+
+local grmt = getrawmetatable(game)
+local backupindex = grmt.__index
+setreadonly(grmt, false)
+
+grmt.__index =
+    newcclosure(
+    function(self, v)
+        if (getgenv().Extortion.Silent.Enabled and Mouse and tostring(v) == "Hit") then
+            if getgenv().Extortion.Silent.Mode == "Target" then
+                Prey = Plr
+            elseif getgenv().Extortion.Silent.Mode == "Normal" then
+                Prey = ClosestPlrFromMouse()
+            end
+
+            if Prey then
+                local endpoint =
+                    mainevent:FireServer(namecalltype, game.Players[tostring(Prey)].Character[getgenv().Extortion.Silent.Part].Position + (game.Players[tostring(Prey)].Character[getgenv().Extortion.Silent.Part].Velocity * getgenv().Extortion.SilentPrediction))
+                return (tostring(v) == "Hit" and endpoint)
+            end
+        end
+        return backupindex(self, v)
+    end
+)
+
+local V = Vector3
+
+if getgenv().Extortion.Misc.Resolver == true then
+    local RunService = game:GetService("RunService")
+
+local function zeroOutYVelocity(hrp)
+    hrp.Velocity = new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+    hrp.AssemblyLinearVelocity = V.new(hrp.Velocity.X, 0, hrp.Velocity.Z) ------LOOOL
+end
+end
+
+
+if getgenv().Extortion.D.Desync == true then
+    
+    function RandomNumberRange(a)
+        return math.random(-a * 100, a * 100) / 100
+    end
+    
+    function RandomVectorRange(a, b, c)
+        return Vector3.new(RandomNumberRange(a), RandomNumberRange(b), RandomNumberRange(c))
+    end
+    
+    local Iskidded = game:GetService("RunService")
+    local YO = false
+
+    local DesyncTypes = {}
+    Iskidded.Heartbeat:Connect(function()
+        if YO == true then
+            DesyncTypes[1] = LocalPlayer.Character.HumanoidRootPart.CFrame
+            DesyncTypes[2] = LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity
+    
+            local SpoofThis = LocalPlayer.Character.HumanoidRootPart.CFrame
+    
+            SpoofThis = SpoofThis * CFrame.new(Vector3.new(0, 0, 0))
+            SpoofThis = SpoofThis * CFrame.Angles(math.rad(RandomNumberRange(180)), math.rad(RandomNumberRange(180)), math.rad(RandomNumberRange(180)))
+    
+            LocalPlayer.Character.HumanoidRootPart.CFrame = SpoofThis
+    
+            LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(1, 1, 1) * 16384
+    
+            Iskidded.RenderStepped:Wait()
+    
+            LocalPlayer.Character.HumanoidRootPart.CFrame = DesyncTypes[1]
+            LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity = DesyncTypes[2]
+        end
+    end)
+    
+end
+
+local ISUCKEDCOLLOPERUP = nil
+
+ISUCKEDCOLLOPERUP = hookmetamethod(game, "__index", newcclosure(function(self, key) 
+	if YO == true then
+	if not checkcaller() then
+		if key == "CFrame" and YO == true and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
+				if self == LocalPlayer.Character.HumanoidRootPart then
+				return DesyncTypes[1] or CFrame.new()
+			elseif self == LocalPlayer.Character.Head then
+                return DesyncTypes[1] and DesyncTypes[1] + Vector3.new(0, LocalPlayer.Character.HumanoidRootPart.Size / 2 + 0.5, 0) or CFrame.new()
+				end
+			end
+		end
+	end
+	return ISUCKEDCOLLOPERUP(self, key)
+end))
+
+local YO, MousePressed, CanNotify = nil, false, false
+
+if getgenv().Extortion.Horizontal.PredictMovement == true then
+    if getgenv().Extortion.Smooth.Smoothness == true then
+        local Suckdick =
+            CF(
+            Camera.CFrame.p,                                                                            -------------- pov i use the best smoothing method because im pro
+            YO.Character[getgenv().Settings.Part.AimPart].Position +
+            YO.Character[getgenv().Settings.Part.AimPart].Velocity *
+                    getgenv().Extortion.Horizontal.PredictionVelocity
+        )
+
+        Camera.CFrame =
+            Camera.CFrame:Lerp(
+            Suckdick,
+            getgenv().Extortion.Smooth.SmoothnessAmount,
+            Enum.EasingStyle.Elastic,
+            Enum.EasingDirection.InOut
+        )
+    else
+        Camera.CFrame =
+            CF(
+            Camera.CFrame.p,
+            YO.Character[getgenv().Extortion.Part.AimPart].Position +
+            YO.Character[getgenv().Extortion.Part.AimPart].Velocity *
+                    getgenv().Extortion.Horizontal.PredictionVelocity + Vector3
+        )
+    end
+elseif getgenv().Settings.Horizontal.PredictMovement == false then
+    if getgenv().Settings.Smooth.Smoothness == true then
+        local Suckdick =
+            CF(
+            Camera.CFrame.p,
+            YO.Character[getgenv().Settings.Part.AimPart].Position
+        )
+        Camera.CFrame =
+            Camera.CFrame:Lerp(
+            Suckdick,
+            getgenv().Settings.Smooth.SmoothnessAmount,
+            getgenv().Settings.Smooth.SmoothMethod,
+            getgenv().Settings.Smooth.SmoothMethodV2
+        )
+    else
+        Camera.CFrame =
+            CF(
+            Camera.CFrame.p,
+            YO.Character[getgenv().Settings.Part.AimPart].Position
+        )
+    end
+end
+
+
+if getgenv().Extortion.Options.FindBestServer == true then
+
+HTTPService = game:GetService("HttpService")
+local TeleportService = game:GetService("TeleportService")
+local StatsService = game:GetService("Stats")
+
+local function fetchServersData(placeId, limit)
+    local url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?limit=%d", placeId, limit)
+    local success, response = pcall(function()
+        return HTTPService:JSONDecode(game:HttpGet(url))
+    end)
+
+    if success and response and response.data then
+        return response.data
+    end
+
+    return nil
+end
+
+local placeId = game.PlaceId
+local serverLimit = 100
+local servers = fetchServersData(placeId, serverLimit)
+
+if not servers then
+    return
+end
+
+local lowestPingServer = servers[1]
+
+for _, server in pairs(servers) do
+    if server["ping"] < lowestPingServer["ping"] and server.maxPlayers > server.playing then
+        lowestPingServer = server
+    end
+end
+
+local commonLoadTime = 5
+task.wait(commonLoadTime)
+
+local pingThreshold = 100
+local serverStats = StatsService.Network.ServerStatsItem
+local dataPing = serverStats["Data Ping"]:GetValueString()
+local pingValue = tonumber(dataPing:match("(%d+)"))
+
+if pingValue >= pingThreshold then
+    TeleportService:TeleportToPlaceInstance(placeId, lowestPingServer.id)
+else
+       print("good ping")
+end
+
+end
+
+if getgenv().Extortion.Options.Aimview == true then
+local lol = game:GetService("RunService")
+local Fedskids =  game.Players.LocalPlayer
+local urabitch = localPlayer:GetMouse()
+local target;
+
+function getgun()
+    for i,v in pairs(target.Character:GetChildren()) do
+    if v and (v:FindFirstChild('Default') or v:FindFirstChild('Handle') )then
+        return v
+        end
+    end
+
+    function sendnotifi(message)
+        game.StarterGui:SetCore("SendNotification", {
+            Title = 'AImViewYourSelf To See If Ur AntiAimViewer is on or something IDK';
+            Text = HI;
+            Duration = "4";
+        })
+    end    
+
+    
+function YO()
+    local a = math.huge
+    local b;
+    for i, v in pairs(game.Players:GetPlayers()) do
+        if v ~= Fedskids and v.Character and v.Character:FindFirstChild("Head") and  v.Character:FindFirstChild("HumanoidRootPart")  then
+            local c = game.Workspace.CurrentCamera:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+            local d = (Vector2.new(urabitch.X, urabitch.Y) - Vector2.new(c.X, c.Y)).Magnitude
+
+            if a > d then
+                b = v
+                a = d
+            end
+        end
+    end
+    return b
+end
+
+local a=Instance.new("Beam")a.Segments=1;a.Width0=0.2;a.Width1=0.2;a.Color=ColorSequence.new(_G.color)a.FaceCamera=true;local b=Instance.new("Attachment")local c=Instance.new("Attachment")a.Attachment0=b;a.Attachment1=c;a.Parent=workspace.Terrain;b.Parent=workspace.Terrain;c.Parent=workspace.Terrain
+end
+end
+
+if Extortion.Options.FPSBoost == true then
+    for _,v in pairs(workspace:GetDescendants()) do
+        if v.ClassName == "Part"
+        or v.ClassName == "SpawnLocation"
+        or v.ClassName == "WedgePart"
+        or v.ClassName == "Terrain"
+        or v.ClassName == "MeshPart" then
+        v.Material = "Plastic"
+        end
+        end
+else
+end
+
+
+if getgenv().Extortion.Options.Shaders== true then
+local Bloom = Instance.new("BloomEffect")
+Bloom.Intensity = 0.1
+Bloom.Threshold = 0
+Bloom.Size = 100
+
+local Tropic = Instance.new("Sky")
+Tropic.Name = "Tropic"
+Tropic.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+Tropic.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+Tropic.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+Tropic.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+Tropic.StarCount = 100
+Tropic.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+Tropic.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+Tropic.Parent = Bloom
+
+local Sky = Instance.new("Sky")
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=196263782"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=196263721"
+Sky.CelestialBodiesShown = false
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=196263643"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=196263721"
+Sky.Parent = Bloom
+
+Bloom.Parent = game:GetService("Lighting")
+
+local Bloom = Instance.new("BloomEffect")
+Bloom.Enabled = false
+Bloom.Intensity = 0.35
+Bloom.Threshold = 0.2
+Bloom.Size = 56
+
+local Tropic = Instance.new("Sky")
+Tropic.Name = "Tropic"
+Tropic.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+Tropic.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+Tropic.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+Tropic.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+Tropic.StarCount = 100
+Tropic.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+Tropic.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+Tropic.Parent = Bloom
+
+local Sky = Instance.new("Sky")
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=196263782"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=196263721"
+Sky.CelestialBodiesShown = false
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=196263643"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=196263721"
+Sky.Parent = Bloom
+
+Bloom.Parent = game:GetService("Lighting")
+local Blur = Instance.new("BlurEffect")
+Blur.Size = 2
+
+Blur.Parent = game:GetService("Lighting")
+local Efecto = Instance.new("BlurEffect")
+Efecto.Name = "Efecto"
+Efecto.Enabled = false
+Efecto.Size = 2
+
+Efecto.Parent = game:GetService("Lighting")
+local Inaritaisha = Instance.new("ColorCorrectionEffect")
+Inaritaisha.Name = "Inari taisha"
+Inaritaisha.Saturation = 0.05
+Inaritaisha.TintColor = Color3.fromRGB(255, 224, 219)
+
+Inaritaisha.Parent = game:GetService("Lighting")
+local Normal = Instance.new("ColorCorrectionEffect")
+Normal.Name = "Normal"
+Normal.Enabled = false
+Normal.Saturation = -0.2
+Normal.TintColor = Color3.fromRGB(255, 232, 215)
+
+Normal.Parent = game:GetService("Lighting")
+local SunRays = Instance.new("SunRaysEffect")
+SunRays.Intensity = 0.05
+
+SunRays.Parent = game:GetService("Lighting")
+local Sunset = Instance.new("Sky")
+Sunset.Name = "Sunset"
+Sunset.SkyboxUp = "rbxassetid://323493360"
+Sunset.SkyboxLf = "rbxassetid://323494252"
+Sunset.SkyboxBk = "rbxassetid://323494035"
+Sunset.SkyboxFt = "rbxassetid://323494130"
+Sunset.SkyboxDn = "rbxassetid://323494368"
+Sunset.SunAngularSize = 14
+Sunset.SkyboxRt = "rbxassetid://323494067"
+
+Sunset.Parent = game:GetService("Lighting")
+local Takayama = Instance.new("ColorCorrectionEffect")
+Takayama.Name = "Takayama"
+Takayama.Enabled = false
+Takayama.Saturation = -0.3
+Takayama.Contrast = 0.1
+Takayama.TintColor = Color3.fromRGB(235, 214, 204)
+
+Takayama.Parent = game:GetService("Lighting")
+local L = game:GetService("Lighting")
+L.Brightness = 2.14
+L.ColorShift_Bottom = Color3.fromRGB(11, 0, 20)
+L.ColorShift_Top = Color3.fromRGB(240, 127, 14)
+L.OutdoorAmbient = Color3.fromRGB(34, 0, 49)
+L.ClockTime = 6.7
+L.FogColor = Color3.fromRGB(94, 76, 106)
+L.FogEnd = 1000
+L.FogStart = 0
+L.ExposureCompensation = 0.24
+L.ShadowSoftness = 0
+L.Ambient = Color3.fromRGB(59, 33, 27)
+
+local Bloom = Instance.new("BloomEffect")
+Bloom.Intensity = 0.1
+Bloom.Threshold = 0
+Bloom.Size = 100
+
+local Tropic = Instance.new("Sky")
+Tropic.Name = "Tropic"
+Tropic.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+Tropic.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+Tropic.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+Tropic.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+Tropic.StarCount = 100
+Tropic.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+Tropic.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+Tropic.Parent = Bloom
+
+local Sky = Instance.new("Sky")
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=196263782"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=196263721"
+Sky.CelestialBodiesShown = false
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=196263643"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=196263721"
+Sky.Parent = Bloom
+
+Bloom.Parent = game:GetService("Lighting")
+
+local Bloom = Instance.new("BloomEffect")
+Bloom.Enabled = false
+Bloom.Intensity = 0.35
+Bloom.Threshold = 0.2
+Bloom.Size = 56
+
+local Tropic = Instance.new("Sky")
+Tropic.Name = "Tropic"
+Tropic.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+Tropic.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+Tropic.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+Tropic.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+Tropic.StarCount = 100
+Tropic.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+Tropic.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+Tropic.Parent = Bloom
+
+local Sky = Instance.new("Sky")
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=196263782"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=196263721"
+Sky.CelestialBodiesShown = false
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=196263643"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=196263721"
+Sky.Parent = Bloom
+
+Bloom.Parent = game:GetService("Lighting")
+local Blur = Instance.new("BlurEffect")
+Blur.Size = 2
+
+Blur.Parent = game:GetService("Lighting")
+local Efecto = Instance.new("BlurEffect")
+Efecto.Name = "Efecto"
+Efecto.Enabled = false
+Efecto.Size = 2
+
+Efecto.Parent = game:GetService("Lighting")
+local Inaritaisha = Instance.new("ColorCorrectionEffect")
+Inaritaisha.Name = "Inari taisha"
+Inaritaisha.Saturation = 0.05
+Inaritaisha.TintColor = Color3.fromRGB(255, 224, 219)
+
+Inaritaisha.Parent = game:GetService("Lighting")
+local Normal = Instance.new("ColorCorrectionEffect")
+Normal.Name = "Normal"
+Normal.Enabled = false
+Normal.Saturation = -0.2
+Normal.TintColor = Color3.fromRGB(255, 232, 215)
+
+Normal.Parent = game:GetService("Lighting")
+local SunRays = Instance.new("SunRaysEffect")
+SunRays.Intensity = 0.05
+
+SunRays.Parent = game:GetService("Lighting")
+local Sunset = Instance.new("Sky")
+Sunset.Name = "Sunset"
+Sunset.SkyboxUp = "rbxassetid://323493360"
+Sunset.SkyboxLf = "rbxassetid://323494252"
+Sunset.SkyboxBk = "rbxassetid://323494035"
+Sunset.SkyboxFt = "rbxassetid://323494130"
+Sunset.SkyboxDn = "rbxassetid://323494368"
+Sunset.SunAngularSize = 14
+Sunset.SkyboxRt = "rbxassetid://323494067"
+
+Sunset.Parent = game:GetService("Lighting")
+local Takayama = Instance.new("ColorCorrectionEffect")
+Takayama.Name = "Takayama"
+Takayama.Enabled = false
+Takayama.Saturation = -0.3
+Takayama.Contrast = 0.1
+Takayama.TintColor = Color3.fromRGB(235, 214, 204)
+
+Takayama.Parent = game:GetService("Lighting")
+local L = game:GetService("Lighting")
+L.Brightness = 2.14
+L.ColorShift_Bottom = Color3.fromRGB(11, 0, 20)
+L.ColorShift_Top = Color3.fromRGB(240, 127, 14)
+L.OutdoorAmbient = Color3.fromRGB(34, 0, 49)
+L.ClockTime = 6.7
+L.FogColor = Color3.fromRGB(94, 76, 106)
+L.FogEnd = 1000
+L.FogStart = 0
+L.ExposureCompensation = 0.24
+L.ShadowSoftness = 0
+L.Ambient = Color3.fromRGB(59, 33, 27) 
+end
+
+if getgenv().Extortion.options.guncham == true then ------------- self code
+    game.GetService(game, "Players").LocalPlayer.Character:FindFirstChildOfClass("Tool").Default.Material =
+Enum.Material.ForceField
+end
+local rubyisaexitscam = setfpscap
+
+if getgenv().Extortion.Options.Fps_Unlocker == true then
+rubyisaexitscam(240)
+end
+
+if getegnv().Extortion.Misc.Esp == true then
+local RunService = game:GetService("RunService");
+local PlayersService = game:GetService("Players");
+
+local Camera = workspace.CurrentCamera;
+local LastPos;
+local Lines = {};
+local Quads = {};
+
+local function HasCharacter(Player)
+    return Player.Character and Player.Character:FindFirstChild("HumanoidRootPart");
+end;
+
+local function DrawQuad(PosA, PosB, PosC, PosD)
+    local PosAScreen, PosAVisible = Camera:WorldToViewportPoint(PosA);
+    local PosBScreen, PosBVisible = Camera:WorldToViewportPoint(PosB);
+    local PosCScreen, PosCVisible = Camera:WorldToViewportPoint(PosC);
+    local PosDScreen, PosDVisible = Camera:WorldToViewportPoint(PosD);
+
+    if (not PosAVisible and not PosBVisible and not PosCVisible and not PosDVisible) then return; end;
+
+    local PosAVec = Vector2.new(PosAScreen.X, PosAScreen.Y);
+    local PosBVec = Vector2.new(PosBScreen.X, PosBScreen.Y);
+    local PosCVec = Vector2.new(PosCScreen.X, PosCScreen.Y);
+    local PosDVec = Vector2.new(PosDScreen.X, PosDScreen.Y);
+
+    local Quad = Drawing.new("Quad");
+        Quad.Thickness = .5;
+        Quad.Color = Color3.fromRGB(255, 255, 255);
+        Quad.Transparency = .25;
+        Quad.ZIndex = 1;
+        Quad.Filled = true
+        Quad.Visible = true;
+
+        Quad.PointA = PosAVec;
+        Quad.PointB = PosBVec;
+        Quad.PointC = PosCVec;
+        Quad.PointD = PosDVec;
+
+    table.insert(Quads, Quad)
+end
+
+local function DrawLine(From, To)
+    local FromScreen, FromVisible = Camera:WorldToViewportPoint(From);
+    local ToScreen, ToVisible = Camera:WorldToViewportPoint(To);
+
+    if (not FromVisible and not ToVisible) then return; end;
+
+    local FromPos = Vector2.new(FromScreen.X, FromScreen.Y);
+    local ToPos = Vector2.new(ToScreen.X, ToScreen.Y);
+
+    local Line = Drawing.new("Line");
+        Line.Thickness = 1;
+        Line.From = FromPos
+        Line.To = ToPos
+        Line.Color = Color3.fromRGB(255, 255, 255);
+        Line.Transparency = 1;
+        Line.ZIndex = 1;
+        Line.Visible = true;
+
+    table.insert(Lines, Line)
+end
+
+local function GetCorners(Part)
+    local CF, Size, Corners = Part.CFrame, Part.Size / 2, {};
+    for X = -1, 1, 2 do for Y = -1, 1, 2 do for Z = -1, 1, 2 do
+        Corners[#Corners+1] = (CF * CFrame.new(Size * Vector3.new(X, Y, Z))).Position;      
+    end; end; end;
+    return Corners;
+end;
+
+local function DrawEsp(Player)
+    local HRP = Player.Character.HumanoidRootPart;
+
+    local CubeVertices = GetCorners({CFrame = HRP.CFrame * CFrame.new(0, -0.5, 0), Size = Vector3.new(3, 5, 3)});
+
+        DrawLine(CubeVertices[1], CubeVertices[2]);
+        DrawLine(CubeVertices[2], CubeVertices[6]);
+        DrawLine(CubeVertices[6], CubeVertices[5]);
+        DrawLine(CubeVertices[5], CubeVertices[1]);
+
+        DrawQuad(CubeVertices[1], CubeVertices[2], CubeVertices[6], CubeVertices[5]);
+       
+        DrawLine(CubeVertices[1], CubeVertices[3]);
+        DrawLine(CubeVertices[2], CubeVertices[4]);
+        DrawLine(CubeVertices[6], CubeVertices[8]);
+        DrawLine(CubeVertices[5], CubeVertices[7]);
+
+        DrawQuad(CubeVertices[2], CubeVertices[4], CubeVertices[8], CubeVertices[6]);
+        DrawQuad(CubeVertices[1], CubeVertices[2], CubeVertices[4], CubeVertices[3]);
+        DrawQuad(CubeVertices[1], CubeVertices[5], CubeVertices[7], CubeVertices[3]);
+        DrawQuad(CubeVertices[5], CubeVertices[7], CubeVertices[8], CubeVertices[6]);
+
+        DrawLine(CubeVertices[3], CubeVertices[4]);
+        DrawLine(CubeVertices[4], CubeVertices[8]);
+        DrawLine(CubeVertices[8], CubeVertices[7]);
+        DrawLine(CubeVertices[7], CubeVertices[3]);
+       
+        DrawQuad(CubeVertices[3], CubeVertices[4], CubeVertices[8], CubeVertices[7]);
+end;
+
+local function BoxEsp()
+    local Players = PlayersService:GetPlayers();
+
+    for i = 1, #Lines do
+        local Line = rawget(Lines, i);
+        if (Line) then Line:Remove(); end;
+    end;
+
+    Lines = {};
+
+    for i = 1, #Quads do
+        local Quad = rawget(Quads, i);
+        if (Quad) then Quad:Remove(); end;
+    end;
+
+    Quads = {};
+
+    for i = 1, #Players do
+        local Player = rawget(Players, i);
+        if HasCharacter(Player) then
+            DrawEsp(Player);
+        end;
+    end;
+end;
+
+RunService.RenderStepped:Connect(BoxEsp);
+end
+
+if getgenv().Extortion.options.Textures == true then
+local faces = {"Front", "Back", "Bottom", "Top", "Right", "Left"}
+local materials = {
+    {"Wood", "3258599312"}, {"WoodPlanks", "8676581022"},
+    {"Brick", "8558400252"}, {"Cobblestone", "5003953441"},
+    {"Concrete", "7341687607"}, {"DiamondPlate", "6849247561"},
+    {"Fabric", "118776397"}, {"Granite", "4722586771"},
+    {"Grass", "4722588177"}, {"Ice", "3823766459"},
+    {"Marble", "62967586"}, {"Metal", "62967586"},
+    {"Sand", "152572215"}
+}
+
+function texture(ins, id)
+    for _, v in pairs(faces) do
+        local texture = Instance.new("Texture", ins)
+        texture.ZIndex = 2147483647
+        texture.Texture = "rbxassetid://" .. id
+        texture.Face = Enum.NormalId[v]
+        texture.Color3 = ins.Color
+        texture.Transparency = ins.Transparency
+    end
+end
+
+for _, part in pairs(workspace:GetDescendants()) do
+    if part:IsA("BasePart") then
+        for _, v in pairs(materials) do
+            if part.Material.Name == v[1] then
+                texture(part, v[2])
+                part.Material = "SmoothPlastic"
+            end
+        end
+    end
+end
+end
+
+if getgenv().Extortion.options.Nodellay == true then
+local ReplicatedStorage = game.ReplicatedStorage
+local Network = game.Network
+local Delay = ReplicatedStorage.BulletHole.Delay
+
+Delay.Position:Destroy()
+Delay.Position = 0
+end
+
+if getgenv().Extortion.options.AntiFling == true then
+    -- // Constants \\ --
+-- [ Services ] --
+local Services = setmetatable({}, {__index = function(Self, Index)
+    local NewService = game.GetService(game, Index)
+    if NewService then
+    Self[Index] = NewService
+    end
+    return NewService
+    end})
+    
+    -- [ LocalPlayer ] --
+    local LocalPlayer = Services.Players.LocalPlayer
+    
+    -- // Functions \\ --
+    local function PlayerAdded(Player)
+       local Detected = false
+       local Character;
+       local PrimaryPart;
+    
+       local function CharacterAdded(NewCharacter)
+           Character = NewCharacter
+           repeat
+               wait()
+               PrimaryPart = NewCharacter:FindFirstChild("HumanoidRootPart")
+           until PrimaryPart
+           Detected = false
+       end
+    
+       CharacterAdded(Player.Character or Player.CharacterAdded:Wait())
+       Player.CharacterAdded:Connect(CharacterAdded)
+       Services.RunService.Heartbeat:Connect(function()
+           if (Character and Character:IsDescendantOf(workspace)) and (PrimaryPart and PrimaryPart:IsDescendantOf(Character)) then
+               if PrimaryPart.AssemblyAngularVelocity.Magnitude > 50 or PrimaryPart.AssemblyLinearVelocity.Magnitude > 100 then
+                   if Detected == false then
+                       game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                           Text = "Fling Exploit detected, Player: " .. tostring(Player);
+                           Color = Color3.fromRGB(255, 200, 0);
+                       })
+                   end
+                   Detected = true
+                   for i,v in ipairs(Character:GetDescendants()) do
+                       if v:IsA("BasePart") then
+                           v.CanCollide = false
+                           v.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                           v.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                           v.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+                       end
+                   end
+                   PrimaryPart.CanCollide = false
+                   PrimaryPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                   PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                   PrimaryPart.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+               end
+           end
+       end)
+    end
+    
+    -- // Event Listeners \\ --
+    for i,v in ipairs(Services.Players:GetPlayers()) do
+       if v ~= LocalPlayer then
+           PlayerAdded(v)
+       end
+    end
+    Services.Players.PlayerAdded:Connect(PlayerAdded)
+    
+    local LastPosition = nil
+    Services.RunService.Heartbeat:Connect(function()
+       pcall(function()
+           local PrimaryPart = LocalPlayer.Character.PrimaryPart
+           if PrimaryPart.AssemblyLinearVelocity.Magnitude > 250 or PrimaryPart.AssemblyAngularVelocity.Magnitude > 250 then
+               PrimaryPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+               PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+               PrimaryPart.CFrame = LastPosition
+    
+               game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                   Text = "You were flung. Neutralizing velocity.";
+                   Color = Color3.fromRGB(255, 0, 0);
+               })
+           elseif PrimaryPart.AssemblyLinearVelocity.Magnitude < 50 or PrimaryPart.AssemblyAngularVelocity.Magnitude > 50 then
+               LastPosition = PrimaryPart.CFrame
+           end
+       end)
+    end)
+end
+
+if getgenv().Extortion.options.Trashtalk == true then
+    local words = {
+        'U gotta be the worst player',
+        'seed',
+        'lol just quit',
+        'imagine loosing to me i dont play this game LOOLL',
+        'sad',
+        'sonned',
+        'how did u fail to get me',
+    }
+    
+    local player = game.Players.LocalPlayer
+    local keybind = 'y'
+    
+    local event = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
+    
+    player:GetMouse().KeyDown:connect(function(key)
+        if key == keybind then
+            event:FireServer(words[math.random(#words)], "All")
+        end
+    end) 
+end
+
